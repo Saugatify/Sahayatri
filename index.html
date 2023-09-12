@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bus Transit Planner</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+</head>
+<body onload="greetUser()">
+  <h1>Bus Transit Planner</h1>
+  <div id="greeting"></div>
+
+  <div class="input">
+    <div class="transit-input">
+      <label for="startTransit">Starting Transit:</label>
+      <div class="transit-dropdown">
+        <input type="text" id="startTransit" autocomplete="off">
+        <div id="startTransitDropdown" class="transit-dropdown-content"></div>
+      </div>
+    </div>
+  
+    <div class="transit-input">
+      <label for="endTransit">Ending Transit:</label>
+      <div class="transit-dropdown">
+        <input type="text" id="endTransit" autocomplete="off">
+        <div id="endTransitDropdown" class="transit-dropdown-content"></div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <label for="studentDiscount">
+    <input type="checkbox" id="studentDiscount" onclick="toggleStudentDiscount()">
+    Are you a student? (45% discount)
+  </label>
+
+  <button onclick="findAndDisplayRoutes()">Find Route</button>
+
+  <div id="result"></div>
+
+  <div id="map"></div>
+
+  <script src="script.js"></script>
+
+
+</body>
+</html>

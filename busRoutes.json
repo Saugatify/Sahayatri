@@ -1,0 +1,89 @@
+[
+    {
+      "busName": "Bus A",
+      "transits": [
+        {
+          "name": "Sukedhara",
+          "latitude": 27.727875,
+          "longitude": 85.345743
+         
+        },
+        {
+          "name": "Chabahil",
+          "latitude": 27.71673,
+          "longitude": 85.3466
+        },
+        {
+          "name": "Dhumbarahi",
+          "latitude": 27.731655,
+          "longitude": 85.344314,
+          "distance": 10
+        }
+      ]
+    },
+    {
+      "busName": "Bus B",
+      "transits": [
+        {
+          "name": "Dhumbarahi",
+          "latitude": 27.731655,
+          "longitude": 85.344314,
+          "distance": 0
+
+        },
+        {
+          "name": "Gaushala",
+          "latitude": 27.7085,
+          "longitude": 85.3466,
+          "distance": 3
+        },
+        {
+          "name": "Transit 5",
+          "distance": 11
+        }
+      ]
+    },
+    {
+      "busName": "Bus C",
+      "transits": [
+        {
+          "name": "Transit 5",
+          "distance": 0
+        },
+        {
+          "name": "Transit 6",
+          "distance": 8
+        },
+        {
+          "name": "Transit 7",
+          "distance": 14
+        }
+      ]
+    },
+    {
+      "busName": "Bus D",
+      "transits": [
+        {
+          "name": "Transit 6",
+          "distance": 0
+        },
+        {
+          "name": "Transit 7",
+          "distance": 2
+        },
+        {
+          "name": "Transit 8",
+          "distance": 6
+        },
+        {
+          "name": "Transit 9",
+          "distance": 10
+        },
+        {
+          "name": "Transit 100",
+          "distance": 16
+        }
+      ]
+    }
+  ]
+  
