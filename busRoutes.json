@@ -12,12 +12,6 @@
           "name": "Chabahil",
           "latitude": 27.71673,
           "longitude": 85.3466
-        },
-        {
-          "name": "Dhumbarahi",
-          "latitude": 27.731655,
-          "longitude": 85.344314,
-          "distance": 10
         }
       ]
     },
@@ -25,10 +19,10 @@
       "busName": "Bus B",
       "transits": [
         {
-          "name": "Dhumbarahi",
-          "latitude": 27.731655,
-          "longitude": 85.344314,
-          "distance": 0
+          "name": "Chabhahil",
+          "latitude": 27.71673,
+          "longitude": 85.3466
+       
 
         },
         {
