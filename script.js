@@ -7,114 +7,124 @@
     let busRoutes;
 
     // Function to greet the user based on the time of day
-
-    async function greetUser() {
-      const currentDate = new Date();
-      const currentHour = currentDate.getHours();
-
-      let greeting = '';
-
-      if (currentHour >= 5 && currentHour < 12) {
-        greeting = 'Good morning';
-      } else if (currentHour >= 12 && currentHour < 17) {
-        greeting = 'Good afternoon';
-      } else {
-        greeting = 'Good evening';
-      }
-
-      const name = localStorage.getItem('userName');
-
-      if (name) {
-        userName = name;
-      } else {
-        const userInput = prompt('Please enter your name:');
-        userName = userInput.trim();
-        localStorage.setItem('userName', userName);
-      }
-
-      const greetingDiv = document.getElementById('greeting');
-      greetingDiv.textContent = `${greeting}, ${userName}!`;
-    }
-
-
-
-// Function to find bus routes from startTransit to endTransit
-
-  async function findBusRoutes(startTransit, endTransit) {
-  const response = await fetch(busRoutesFile);
-  busRoutes = await response.json();
-
-  const availableRoutes = [];
-
-  const startNode = { transit: startTransit, parent: null, bus: null, distance: 0, fare: 0 };
-  const queue = [startNode];
-
-  while (queue.length > 0) {
-    const currentNode = queue.shift();
-
-    if (currentNode.transit === endTransit) {
-      const route = buildRoute(currentNode);
-      availableRoutes.push(route);
-      break;
-    }
-
-    const currentRoutes = busRoutes.filter(route =>
-      route.transits.some(transit => transit.name === currentNode.transit)
-    );
-
-    for (const route of currentRoutes) {
-      const nextTransits = route.transits.slice(
-        route.transits.findIndex(transit => transit.name === currentNode.transit) + 1
-      );
-
-      for (const nextTransit of nextTransits) {
-        const distance = currentNode.distance + nextTransit.distance;
-        const fare = calculateFare(distance);
-        const newNode = {
-          transit: nextTransit.name,
-          parent: currentNode,
-          bus: route.busName,
-          distance: distance,
-          fare: fare
-        };
-        queue.push(newNode);
-      }
-    }
-  }
-
-  return availableRoutes;
-}
-
-// Function to build a textual route based on transit nodes
-
-    function buildRoute(node) {
-      const route = [];
-      let currentNode = node;
-      let directBus = false;
-
-      while (currentNode !== null) {
-        if (currentNode.bus) {
-          if (directBus) {
-            route.unshift(`Catch ${currentNode.bus} and reach ${currentNode.transit}`);
-          } else {
-            const nextNode = currentNode.parent;
-            if (nextNode && nextNode.transit === currentNode.transit) {
-              directBus = true;
-            } else {
-              route.unshift(`Catch ${currentNode.bus} and reach ${currentNode.transit}`);
+    async function findBusRoutes(startTransit, endTransit) {
+      const response = await fetch(busRoutesFile);
+      busRoutes = await response.json();
+    
+      const availableRoutes = [];
+    
+      const startNode = { transit: startTransit, parent: null, bus: null, distance: 0, fare: 0 };
+      const queue = [startNode];
+      const visitedRoutes = new Set(); // Keep track of visited routes
+    
+      while (queue.length > 0) {
+        const currentNode = queue.shift();
+    
+        if (currentNode.transit === endTransit) {
+          const route = buildRoute(currentNode);
+          availableRoutes.push(route);
+        }
+    
+        const currentRoutes = busRoutes.filter(route =>
+          route.transits.some(transit => transit.name === currentNode.transit)
+        );
+    
+        // Check for a direct route
+        const directRoute = currentRoutes.find(route =>
+          route.transits.some(transit => transit.name === endTransit)
+        );
+    
+        if (directRoute) {
+          const directTransit = directRoute.transits.find(transit => transit.name === endTransit);
+          const directNode = {
+            transit: directTransit.name,
+            parent: currentNode,
+            bus: directRoute.busName,
+            distance: currentNode.distance + (directTransit.distance || 0),
+            fare: calculateFare(currentNode.distance + (directTransit.distance || 0)),
+          };
+          availableRoutes.push(buildRoute(directNode));
+        } else {
+          for (const route of currentRoutes) {
+            const nextTransits = route.transits.slice(
+              route.transits.findIndex(transit => transit.name === currentNode.transit) + 1
+            );
+    
+            for (const nextTransit of nextTransits) {
+              const isDirectRoute = nextTransit.name === endTransit && route.busName === currentNode.bus;
+    
+              if (isDirectRoute || route.busName !== currentNode.bus) {
+                const distance = currentNode.distance + (nextTransit.distance || 0);
+                const fare = calculateFare(distance);
+    
+                const newNode = {
+                  transit: nextTransit.name,
+                  parent: currentNode,
+                  bus: isDirectRoute ? currentNode.bus : route.busName,
+                  distance: distance,
+                  fare: fare,
+                };
+    
+                const routeKey = `${currentNode.transit}-${newNode.transit}-${newNode.bus}`;
+                if (!visitedRoutes.has(routeKey)) {
+                  queue.push(newNode);
+                  visitedRoutes.add(routeKey);
+                }
+              }
             }
           }
-        } else {
-          route.unshift(`Get to ${currentNode.transit}`);
         }
-        currentNode = currentNode.parent;
       }
-
-      route[route.length - 1] += ` (Fare: Rs ${node.fare}, Distance: ${node.distance} km)`;
-
-      return route;
+    
+      return availableRoutes;
     }
     
+
+
+
+
+
+// Function to build a textual route based on transit nodes
+function buildRoute(node) {
+  const route = [];
+  let currentNode = node;
+  let directBus = false;
+
+  // Create a set to keep track of visited transit locations
+  const visitedTransits = new Set();
+
+  while (currentNode !== null) {
+    if (currentNode.bus) {
+      const nextNode = currentNode.parent;
+
+      if (directBus || !nextNode || nextNode.bus !== currentNode.bus) {
+        // Suggest a direct bus if already in a direct route or changing to a different bus
+        route.unshift(`Catch ${currentNode.bus} and reach ${currentNode.transit}`);
+        visitedTransits.add(currentNode.transit);
+        directBus = true;
+      }
+    } else {
+      // Check if the transit has already been visited
+      if (!visitedTransits.has(currentNode.transit)) {
+        route.unshift(`Get to ${currentNode.transit}`);
+        visitedTransits.add(currentNode.transit);
+      }
+    }
+
+    currentNode = currentNode.parent;
+  }
+
+  // Only append fare and distance information if there are changes in the route
+  if (route.length > 1) {
+    route[route.length - 1] += ` (Fare: Rs ${node.fare}, Distance: ${node.distance} km)`;
+  }
+
+  return route;
+}
+
+
+
+
 
 // Function to calculate fare based on distance and student status
 
@@ -325,7 +335,10 @@ async function fetchTransitOptions() {
   const response = await fetch(busRoutesFile);
   busRoutes = await response.json();
 
-  transitOptions = busRoutes.flatMap(route => route.transits.map(transit => transit.name));
+  // Extract unique transit names using Set
+  const uniqueTransitNames = new Set(busRoutes.flatMap(route => route.transits.map(transit => transit.name)));
+
+  transitOptions = Array.from(uniqueTransitNames);
 }
 
 // Call the fetchTransitOptions function to populate the transit options
