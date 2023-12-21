@@ -116,7 +116,7 @@ function buildRoute(node) {
 
   // Only append fare and distance information if there are changes in the route
   if (route.length > 1) {
-    route[route.length - 1] += ` (Fare: Rs ${node.fare}, Distance: ${node.distance} km)`;
+   // route[route.length - 1] += ` (Fare: Rs ${node.fare}, Distance: ${node.distance} km)`;
   }
 
   return route;

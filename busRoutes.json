@@ -116,10 +116,191 @@
       ]
     },
     {
-      "busName": "Sajha Yatayat",
+      "busName": "Bangalamukhi",
       "transits": [
-        
+        {
+          "name": "Tripureshwor",
+          "latitude": 27.6949964,
+          "longitude": 85.3149142
+        },
+        {
+          "name": "Sundhara",
+          "latitude": 27.7000078,
+          "longitude": 85.311683
+        },
+        {
+          "name": "Bir Hospital",
+          "latitude": 27.7048249,
+          "longitude": 85.3136514
+        },
+        {
+          "name": "Bhotahiti",
+          "latitude": 27.7071328,
+          "longitude": 85.3141872
+        },
+        {
+          "name": "Kamaladi",
+          "latitude": 27.709047,
+          "longitude": 85.3194375
+        },
+        {
+          "name": "Kamalpokhari",
+          "latitude": 27.7108941,
+          "longitude": 85.3254142
+        },
+        {
+          "name": "City Center, Gyaneshwor",
+          "latitude": 27.7102351,
+          "longitude": 85.3330053
+        },
+        {
+          "name": "Gyaneshwor Chowk",
+          "latitude": 27.7083995,
+          "longitude": 85.3316722
+        },
+        {
+          "name": "Gyaneshwor",
+          "latitude": 27.7102351,
+          "longitude": 85.3330053
+        },
+        {
+          "name": "Ratopul",
+          "latitude": 27.7083443,
+          "longitude": 85.3386138
+        },
+        {
+          "name": "Gausala Chowk",
+          "latitude": 27.7078618,
+          "longitude": 85.3433623
+        },
+        {
+          "name": "Jaya Bageswori",
+          "latitude": 27.6962886,
+          "longitude": 85.4865371
+        },
+        {
+          "name": "Mitrapark",
+          "latitude": 27.713067,
+          "longitude": 85.3454212
+        },
+        {
+          "name": "Chabhahil Chowk",
+          "latitude": 27.7172633,
+          "longitude": 85.346594
+        },
+        {
+          "name": "Gopi Krishna Hall",
+          "latitude": 27.7222481,
+          "longitude": 85.3468914
+        },
+      
+        {
+          "name": "Bhrikuti Chowk, Mahankal",
+          "latitude": 27.7273791,
+          "longitude": 85.3570077
+        },
+        {
+          "name": "Mahankal Oralo",
+          "latitude": 27.7266408,
+          "longitude": 85.3582844
+        },
+        {
+          "name": "Tenzing Chowk, Kapan",
+          "latitude": 27.7287847,
+          "longitude": 85.3591923
+        },
+        {
+          "name": "Kharibot, Kapan",
+          "latitude": 27.7354947,
+          "longitude": 85.3642735
+        },
+        {
+          "name": "Kapan Banglamukhi",
+          "latitude": 27.7262807,
+          "longitude": 85.3546484
+        }
       ]
+      
+    },
+    {
+      "busName": "Nepal Yatayat",
+      "transits": [
+        {
+      "name": "Tripureshwor",
+      "latitude": 27.6949964,
+      "longitude": 85.3149142
+    },
+    {
+      "name": "Thapathali",
+      "latitude": 27.6894055,
+      "longitude": 85.3226683
+    },
+    {
+      "name": "Maitighar",
+      "latitude": 27.6919767,
+      "longitude": 85.3229913
+    },
+    {
+      "name": "Babarmahal",
+      "latitude": 27.6934832,
+      "longitude": 85.3242836
+    },
+    {
+      "name": "Buddhanagar",
+      "latitude": 27.6867401,
+      "longitude": 85.3304212
+    },
+    {
+      "name": "Minbhawan",
+      "latitude": 27.6891626,
+      "longitude": 85.3403905
+    },
+    {
+      "name": "Koteshwor",
+      "latitude": 27.6755549,
+      "longitude": 85.3459238
+    },
+    {
+      "name": "Jadibuti",
+      "latitude": 27.6750609,
+      "longitude": 85.3530277
+    },
+    {
+      "name": "Khahare Chowk, Pepsicola",
+      "latitude": 27.6966088,
+      "longitude": 85.3662495
+    },
+    {
+      "name": "Purano Krishnamandir, Gothatar",
+      "latitude": 27.7131556,
+      "longitude": 85.375836
+    },
+    {
+      "name": "Hamro Mart, Gothatar",
+      "latitude": 27.7015916,
+      "longitude": 85.3807886
+    },
+    {
+      "name": "Tej Binayak, Gothatar",
+      "latitude": 27.7064555,
+      "longitude": 85.3790152
+    },
+    {
+      "name": "Pipalbot, Gothatar",
+      "latitude": 27.6692141,
+      "longitude": 85.3479251
+    },
+    {
+      "name": "Sapkota Chowk, Mulpani",
+      "latitude": 27.7109696,
+      "longitude": 85.3988579
+    },
+    {
+      "name": "Baba Chowk, Mulpani",
+      "latitude": 27.7113665,
+      "longitude": 85.3932925
+    }
+  ] 
     }
   ]
   
