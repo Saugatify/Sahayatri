@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  body {
+  font-family: 'Arial', sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#locationText {
+  resize: none;
+}
+
+@media only screen and (max-width: 600px) {
+  input, textarea, button {
+    width: 100%;
+  
+  }
+}
+</style>
+  <title>Bus Transit Tracker</title>
+  
+</head>
+<body>
+  <h1>Bus Transit Tracker</h1>
+  
+  <label for="busName">Bus Name:</label>
+  <input type="text" id="busName" name="busName" required>
+  
+  <label for="transitName">Transit Name:</label>
+  <input type="text" id="transitName" name="transitName" required>
+
+  <button onclick="saveLocation()">Save Location</button>
+
+  <textarea id="locationText" rows="10" cols="50"></textarea>
+
+  <script>
+    let currentLocationText; // Track the current text box
+
+    function saveLocation() {
+      const busName = document.getElementById('busName').value;
+      const transitName = document.getElementById('transitName').value;
+
+      if (!busName) {
+        console.error('Please enter the bus name.');
+        return;
+      }
+
+      // Use geolocation API to get current location (only if not already obtained)
+      navigator.geolocation.getCurrentPosition(position => {
+        const { longitude, latitude } = position.coords;
+
+        const newData = {
+          longitude,
+          latitude,
+          busName,
+          transitName,
+        };
+
+        // Convert the current text content to JSON array
+        let currentData = [];
+        try {
+          currentData = JSON.parse(document.getElementById('locationText').value);
+        } catch (error) {
+          // Ignore parsing errors, assume it's an empty or invalid JSON
+        }
+
+        // Append the new location data to the existing data array
+        currentData.push(newData);
+
+        // Set the updated data back as a formatted JSON
+        document.getElementById('locationText').value = JSON.stringify(currentData, null, 2);
+      }, error => {
+        console.error('Error getting location:', error);
+        console.error('Error getting location. Please try again.');
+      });
+    }
+  </script>
+</body>
+</html>
