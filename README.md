@@ -1,7 +1,7 @@
 # Sahayatri
-[Sahaytri](Sahayatri.vercel.app)
+[Sahaytri] ( sahayatri.vercel.app)
 
-[Contribute By Location](Sahayatri.vercel.app/system)
+[Contribute By Location] (sahayatri.vercel.app/system)
 
 Sahayatri is an open-source bus finder app that helps users find the best bus routes based on their start and end transit locations. The app offers a user-friendly interface, encouraging collaboration through its open-source bus feature. Users can contribute by adding bus locations to enhance the app's database.
 
