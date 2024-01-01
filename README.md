@@ -1,5 +1,5 @@
 # Sahayatri
-[Sahaytri](https://sahayatri.vercel.app/)
+[Sahayatri](https://sahayatri.vercel.app/)
 
 [Contribute By Location](https://sahayatri.vercel.app/system)
 
