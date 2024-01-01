@@ -47,7 +47,7 @@ Please make sure to update tests as appropriate.
 
 You can then find the Input boxes named
 #### Enter the Bus Name: 
-You need to enter the bus Name you are traveling.
+You need to enter the bus Name you are traveling. 
 
 (If you dont have name for the bus or traveling by Micro or Tampu, Just Enter the possible Start and End Transit Along with it's nature, Tampu/Micro)
 
@@ -60,6 +60,11 @@ Every time the bus stops you need to Add the Transit Name and Hit the Save Locat
 It might ask for the Location permit, make sure that you allow it.
 
 #### ___For next Transit You need to clear the input box for Transit Name and hit save location Button.___
+
+## After the Data is created simply copy the data and save it in you notepad or anything you want, come to the Github and save the file in the busRoutes.json file matching the format of the Routes in the file. In the Future the update might work to add the seperate file for Seperate Buses or Local Buses.
+
+
+You can also remember the bus Number and add it later wise.
 
 
 ## License
