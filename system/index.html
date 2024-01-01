@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+  <title>Bus Transit Tracker</title>
+   <style>
   body {
   font-family: 'Arial', sans-serif;
   margin: 20px;
@@ -48,8 +49,6 @@ button:hover {
   }
 }
 </style>
-  <title>Bus Transit Tracker</title>
-  
 </head>
 <body>
   <h1>Bus Transit Tracker</h1>
@@ -62,29 +61,31 @@ button:hover {
 
   <button onclick="saveLocation()">Save Location</button>
 
-  <textarea id="locationText" rows="10" cols="50"></textarea>
+  <textarea id="locationText" rows="15" cols="70"></textarea>
 
   <script>
-    let currentLocationText; // Track the current text box
-
     function saveLocation() {
       const busName = document.getElementById('busName').value;
       const transitName = document.getElementById('transitName').value;
 
-      if (!busName) {
-        console.error('Please enter the bus name.');
+      if (!busName || !transitName) {
+        console.error('Please enter both bus name and transit name.');
         return;
       }
 
       // Use geolocation API to get current location (only if not already obtained)
       navigator.geolocation.getCurrentPosition(position => {
-        const { longitude, latitude } = position.coords;
+        const { latitude, longitude } = position.coords;
 
         const newData = {
-          longitude,
-          latitude,
           busName,
-          transitName,
+          transits: [
+            {
+              name: transitName,
+              latitude,
+              longitude,
+            }
+          ]
         };
 
         // Convert the current text content to JSON array
@@ -95,8 +96,20 @@ button:hover {
           // Ignore parsing errors, assume it's an empty or invalid JSON
         }
 
-        // Append the new location data to the existing data array
-        currentData.push(newData);
+        // Find the bus entry in the current data array
+        const existingBusIndex = currentData.findIndex(entry => entry.busName === busName);
+
+        if (existingBusIndex !== -1) {
+          // Bus entry already exists, append transit to existing entry
+          currentData[existingBusIndex].transits.push({
+            name: transitName,
+            latitude,
+            longitude,
+          });
+        } else {
+          // Bus entry doesn't exist, add new entry
+          currentData.push(newData);
+        }
 
         // Set the updated data back as a formatted JSON
         document.getElementById('locationText').value = JSON.stringify(currentData, null, 2);
